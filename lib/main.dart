@@ -5,13 +5,15 @@ import 'package:flutter_application_login/screens/home_screen.dart';
 import 'package:flutter_application_login/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  runApp(ChangeNotifierProvider(create: (_)=>AuthProvider()..tryAutoLogin(),
+  child: MainApp(),));
+  // WidgetsFlutterBinding.ensureInitialized();
 
-  final authProvider=AuthProvider();
-  await authProvider.loadToken();
-  runApp(
-    MultiProvider(providers: [ChangeNotifierProvider(create: (_)=> authProvider),],child: MainApp(),));
+  // final authProvider=AuthProvider();
+  // await authProvider.loadToken();
+  // runApp(
+  //   MultiProvider(providers: [ChangeNotifierProvider(create: (_)=> authProvider),],child: MainApp(),));
 }
 
 class MainApp extends StatelessWidget {
